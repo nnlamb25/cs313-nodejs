@@ -1,13 +1,12 @@
 var cool = require('cool-ascii-faces');
 var express = require('express');
 
-const path = require('path')
-const PORT = process.env.PORT || 5000
-const url = require('url')
-
+const path = require('path');
+const PORT = process.env.PORT || 5000;
+const url = require('url');
 
 express()
-.use(express.static(path.join(__dirname, 'public')))
+  .use(express.static(path.join(__dirname, 'public')))
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
@@ -38,7 +37,7 @@ express()
 
   	res.render("result", { result : result });
     })
-  .get('/postagePrice', req, res) => {
+  .get('/postagePrice', (req, res) => {
     var q = url.parse(req.url, true);
   	var qdata = q.query;
   	var type = qdata.type;
