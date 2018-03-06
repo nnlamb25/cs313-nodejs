@@ -183,6 +183,6 @@ express()
             price = "A lot";
         }
     }
-    res.render("pPrice", { price: price, type : type, price : price });
+    res.render("pPrice", { price: price, type : type, weight : weight });
     })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
