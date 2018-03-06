@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prove 09</title>
+</head>
+<body>
+	<form method="get" action="/postagePrice">
+		Mail Type <select name="type">
+			<option value="stamped">Letters (Stamped)</option>
+			<option value="metered">Letters (Metered)</option>
+			<option value="flats">Large Envelopes (Flats)</option>
+			<option value="parcels">Parcels</option>
+		</select>
+		<br>
+		Weight (oz.) <input type="text" size="5" name="weight"><br><br>
+		<input type="submit" name="calc" value="Calculate">
+	</form>
+</body>
+</html>
