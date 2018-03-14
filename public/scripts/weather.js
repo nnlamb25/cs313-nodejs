@@ -14,7 +14,6 @@ function getLocation()
     }
 }
 
-
 function showPosition(position)
 {
     if (position == '')
