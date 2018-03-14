@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Weather Station</title>
+    <link rel="stylesheet" href="stylesheets/weather.css">
+    <script src="scripts/weather.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    <h1 id="header">Weather Station</h1>
+    <button id="current_location_button" onclick="getLocation()">Use Current Location</button>
+	<div id="search">
+		City: <input id="search_bar" type="text" size="14" name="city">
+		<input id="info_button" onclick="showPosition('')" type="submit" name="calc" value="Get Info">
+	</div>
+    <br>
+    <div id="info_wrapper"><div id="weather_info">
+        <h1>Welcome to Weather Station!</h1><br>
+        Search for a city or use your current location
+        </div></div>
+</body>
+</html>

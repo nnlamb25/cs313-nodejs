@@ -1,5 +1,7 @@
 var cool = require('cool-ascii-faces');
 var express = require('express');
+var ejs = require('ejs');
+var fs = require('fs');
 
 const path = require('path');
 const PORT = process.env.PORT || 5000;
@@ -10,7 +12,11 @@ express()
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('pages/index'))
-  .get('/math', (req, res) => {
+  .get('/weather', (req, res) => {
+    res.render("weather")
+})
+  
+  /*.get('/math', (req, res) => {
   	var q = url.parse(req.url, true);
   	var qdata = q.query;
   	var op = qdata.operation;
@@ -184,5 +190,5 @@ express()
         }
     }
     res.render("pPrice", { price: price, type : type, weight : weight });
-    })
+    })*/
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))

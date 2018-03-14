@@ -1,0 +1,51 @@
+html
+{
+    
+}
+
+#header
+{
+    background-color: deepskyblue;
+    width: 100%;
+    text-align: center;
+    font-size: 50px;
+    margin: 0;
+    padding: 15px 0px;
+}
+
+#current_location_button
+{
+    margin-top: 10px;
+    width: 9em;
+    height: 3em;
+    font-size: 12px;
+    border-radius: 5px;
+}
+
+#search
+{
+    margin-top: -30px;
+    font-size: 20px;
+    text-align: right;
+}
+
+#search_bar
+{
+    font-size: 16px;
+    color: blue;
+}
+
+#info_button
+{
+    width: 3.7em;
+    height: 10em;
+    font-size: 18px;
+}
+
+#info_wrapper
+{
+    margin-top: 10px;
+    width: 100%;
+    font-size: 30px;
+    text-align: center;
+}

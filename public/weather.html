@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html onload="getLocation()">
+<head>
+	<title>Weather Station</title>
+    <script>
+        function getLocation()
+        {
+            if (navigator.geolocation) 
+            {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } 
+            else 
+            { 
+                alert("Geolocation is not supported by this browser.");
+            }
+        }
+        
+        function showPosition(position)
+        {
+            alert("Latitude: " + position.coords.latitude + "Longitude: " + position.coords.longitude);
+        }
+    </script>
+</head>
+<body>
+	<form method="get" action="/math">
+		Operation <select name="operation">
+			<option value="add">Add</option>
+			<option value="sub">Subtract</option>
+			<option value="mult">Multiply</option>
+			<option value="div">Divide</option>
+		</select>
+		<br>
+		Left: <input type="text" size="5" name="leftOp">
+		Right: <input type="text" size="5" name="rightOp"><br>
+		<input type="submit" name="calc" value="Calculate">
+	</form>
+</body>
+</html>
