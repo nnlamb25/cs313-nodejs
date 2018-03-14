@@ -4,7 +4,7 @@ function getLocation()
     $("#weather_info").append("Getting your location...<br>");
     if (navigator.geolocation) 
     {
-       navigator.geolocation.getCurrentPosition(showPosition);
+        navigator.geolocation.getCurrentPosition(showPosition);
     } 
     else 
     { 
@@ -76,7 +76,7 @@ function showPosition(position)
             { 
                 $("#weather_info").empty();
                 $("#weather_info").append("Search for a city or use your current location!");
-                alert("ERROR: Invalid city name");
+                alert("ERROR: Cannot find your location");
             }
         });
     }
