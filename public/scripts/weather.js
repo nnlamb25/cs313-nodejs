@@ -1,3 +1,11 @@
+function search()
+{
+    if (event.keyCode == 13)
+    {
+        $('#info_button').click();
+    }
+}
+
 function getLocation()
 {
     $("#weather_info").empty();

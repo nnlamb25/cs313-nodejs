@@ -10,7 +10,7 @@
     <h1 id="header">Weather Station</h1>
     <button id="current_location_button" onclick="getLocation()">Use Current Location</button>
 	<div id="search">
-		City: <input id="search_bar" type="text" size="14" name="city">
+		City: <input id="search_bar" type="text" size="14" name="city" onkeyup="search()">
 		<input id="info_button" onclick="showPosition('')" type="submit" name="calc" value="Get Info">
 	</div>
     <br>
