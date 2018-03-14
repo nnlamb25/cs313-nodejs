@@ -55,7 +55,6 @@ function showPosition(position)
                 $("#weather_info").empty();
                 $("#weather_info").append("Search for a city or use your current location!");
                 alert("ERROR: Invalid city name");
-                alert(textStatus); alert(errorThrown);
             }
         });
     }
@@ -86,7 +85,6 @@ function showPosition(position)
                 $("#weather_info").empty();
                 $("#weather_info").append("Search for a city or use your current location!");
                 alert("ERROR: Cannot find your location");
-                alert(textStatus); alert(errorThrown);
             }
         });
     }
