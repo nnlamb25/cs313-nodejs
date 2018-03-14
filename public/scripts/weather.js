@@ -54,6 +54,10 @@ function showPosition(position)
             { 
                 $("#weather_info").empty();
                 $("#weather_info").append("Search for a city or use your current location!");
+                console.log("ERROR:");
+                console.log("Request Status: " + XMLHttpRequest.status);
+                console.log("Text Status: " + textStatus);
+                console.log("Error Thrown: " + errorThrown);
                 alert("ERROR: Invalid city name");
             }
         });
@@ -84,6 +88,10 @@ function showPosition(position)
             { 
                 $("#weather_info").empty();
                 $("#weather_info").append("Search for a city or use your current location!");
+                console.log("ERROR:");
+                console.log("Request Status: " + XMLHttpRequest.status);
+                console.log("Text Status: " + textStatus);
+                console.log("Error Thrown: " + errorThrown);
                 alert("ERROR: Cannot find your location");
             }
         });
