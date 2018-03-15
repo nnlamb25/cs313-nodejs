@@ -24,6 +24,30 @@ function getLocation()
 
 function showPosition(position)
 {
+    if (position != '')
+    {
+        $("#weather_info").empty();
+                $("#weather_info").append("Filling your request...<br>");
+        
+        var url = "/weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
+            
+        window.location.replace(url);
+    }
+    else
+    {
+        var city = document.getElementById("search_bar").value;
+        if (city.length < 2)
+        {
+            alert("ERROR: Must enter a city name");
+            return;
+        }
+        
+        var url = "/weather?city=" + city;
+        
+        window.location.replace(url);
+    }
+}
+    /*
     if (position == '')
     {
         position = document.getElementById("search_bar").value;
@@ -96,4 +120,4 @@ function showPosition(position)
             }
         });
     }
-}
+}*/
