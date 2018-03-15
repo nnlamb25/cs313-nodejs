@@ -41,36 +41,42 @@ express()
     var lon = req.query.lon;
     var lat = req.query.lat;
     
-    if (typeof city == 'undefined' && typeof lon == 'undefined' && typeof lat == 'undefined')
+    if (typeof city == 'undefined' && 
+        typeof lon == 'undefined' && 
+        typeof lat == 'undefined')
     {
-        console.log("Nothing to lookup");
         res.render("weather");
     }
-    else if (typeof city == 'undefined' && typeof lon != 'undefined' && typeof lat != 'undefined')
+    else if (typeof city == 'undefined' && 
+             typeof lon != 'undefined' && 
+             typeof lat != 'undefined')
     {
-        console.log("Longitude and Latitude");
+        console.log("Looking up weather for:\nLongitude: " + lon + "\nLatitude: " + lat);
         var lookupUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + 
-               lat + "&lon=" + lon + "&appid=" + appid;
+            lat + "&lon=" + lon + "&appid=" + appid;
         
         lookupJson(lookupUrl);
         res.render("weather");
     }
-    else if (typeof city != 'undefined' && typeof long == 'undefined' && typeof lat == 'undefined')
+    else if (typeof city != 'undefined' && 
+             typeof long == 'undefined' && 
+             typeof lat == 'undefined')
     {
-        console.log("City");
-        var lookupUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + appid;
+        console.log("Looking up weather for:\nCity: " + city);
+        var lookupUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + 
+            city + "&appid=" + appid;
         
         lookupJson(lookupUrl);
         res.render("weather");
     }
     else
     {
-        console.log("something weird");
         res.render("weather");
     }
     
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
+
 
 function lookupJson(lookupUrl)
 {
@@ -80,7 +86,8 @@ function lookupJson(lookupUrl)
     json: true
     }, function (error, response, body) {
 
-        if (!error && response.statusCode === 200) {
+        if (!error && response.statusCode === 200)
+        {
             console.log(body) // Print the json response
         }
     });
