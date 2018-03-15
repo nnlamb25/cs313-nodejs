@@ -3,19 +3,11 @@ var express = require('express');
 var ejs = require('ejs');
 var fs = require('fs');
 var request = require('request');
+var jsonQuery = require('json-query');
 
 var appid = "3411e21b6e00192d6705faf2bb0b65d1";
 var jsonUrl = '';
-//var jsonUrl = "http://api.openweathermap.org/data/2.5/weather?q=Brea&appid=3411e21b6e00192d6705faf2bb0b65d1";
-
-/*
-var url = "http://api.openweathermap.org/data/2.5/weather?lat=" + 
-               position.coords.latitude + "&lon=" + position.coords.longitude + 
-               "&appid=3411e21b6e00192d6705faf2bb0b65d1";
-
-var url = "http://api.openweathermap.org/data/2.5/weather?lu=yes&q=" + 
-                city + "&appid=3411e21b6e00192d6705faf2bb0b65d1";
-*/
+var res1;
 
 request({
     url: jsonUrl,
@@ -52,22 +44,22 @@ express()
              typeof lat != 'undefined')
     {
         console.log("Looking up weather for:\nLongitude: " + lon + "\nLatitude: " + lat);
-        var lookupUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + 
+        jsonUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + 
             lat + "&lon=" + lon + "&appid=" + appid;
         
-        lookupJson(lookupUrl);
-        res.render("weather");
+        res1 = res
+        jsonLookup();
     }
     else if (typeof city != 'undefined' && 
              typeof long == 'undefined' && 
              typeof lat == 'undefined')
     {
         console.log("Looking up weather for:\nCity: " + city);
-        var lookupUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + 
+        jsonUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + 
             city + "&appid=" + appid;
         
-        lookupJson(lookupUrl);
-        res.render("weather");
+        res1 = res;
+        jsonLookup();
     }
     else
     {
@@ -77,18 +69,25 @@ express()
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-
-function lookupJson(lookupUrl)
+function jsonLookup()
 {
-    jsonUrl = lookupUrl;
     request({
-    url: jsonUrl,
-    json: true
-    }, function (error, response, body) {
+            url: jsonUrl,
+            json: true
+            }, function (error, response, body, res) {
 
-        if (!error && response.statusCode === 200)
-        {
-            console.log(body) // Print the json response
-        }
-    });
+                if (!error && response.statusCode === 200)
+                {
+                    console.log(body) // Print the json response
+                    var cityName = body.name;
+                    var temp = String(Math.round(Number(body.main.temp) * (9/5) - 459.67)) + " ℉";
+                    var description = body.weather[0].description;
+                    res1.render("weather", {city : cityName, temp : temp, description : description});
+                }
+                else
+                {
+                    console.log("ERROR: " + response.statusCode);
+                    res1.render("weather", {error : response.statusCode});
+                }
+            });
 }

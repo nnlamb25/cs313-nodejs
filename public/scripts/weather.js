@@ -24,11 +24,11 @@ function getLocation()
 
 function showPosition(position)
 {
+    $("#weather_info").empty();
+    $("#weather_info").append("Filling your request...<br>");
+        
     if (position != '')
     {
-        $("#weather_info").empty();
-                $("#weather_info").append("Filling your request...<br>");
-        
         var url = "/weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
             
         window.location.replace(url);
@@ -38,6 +38,8 @@ function showPosition(position)
         var city = document.getElementById("search_bar").value;
         if (city.length < 2)
         {
+            $("#weather_info").empty();
+            $("#weather_info").append("Search for a city or use your current location!");
             alert("ERROR: Must enter a city name");
             return;
         }

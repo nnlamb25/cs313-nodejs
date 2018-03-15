@@ -15,8 +15,20 @@
 	</div>
     <br>
     <div id="info_wrapper"><div id="weather_info">
-        <h1>Welcome to Weather Station!</h1><br>
-        Search for a city or use your current location
+        <% if (typeof error == 'undefined' && typeof city == 'undefined'
+              && typeof temp == 'undefined' && typeof description == 'undefined') { %>
+            <h1>Welcome to Weather Station!</h1><br>
+            Search for a city or use your current location.<br>
+        <% } if (typeof error != 'undefined') { %>
+            <h2>ERROR: <%= error %></h2>
+        <% } if (typeof city != 'undefined') { %>
+            <%= city %><br>
+        <% } if (typeof temp != 'undefined') { %>
+            <%= temp %><br>
+        <% } if (typeof description != 'undefined') { %>
+            <%= description %><br>
+        <% } %>
+        
         </div></div>
 </body>
 </html>
