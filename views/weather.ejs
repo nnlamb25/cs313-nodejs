@@ -20,7 +20,8 @@
             <h1>Welcome to Weather Station!</h1><br>
             Search for a city or use your current location.<br>
         <% } if (typeof error != 'undefined') { %>
-            <h2>ERROR: <%= error %></h2>
+            ERROR: <%= error %><br>Could not get weather info.<br><br>
+            Search for a city or use your current location!
         <% } if (typeof city != 'undefined') { %>
             <%= city %><br>
         <% } if (typeof temp != 'undefined') { %>
