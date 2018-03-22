@@ -9,6 +9,9 @@ var appid = "3411e21b6e00192d6705faf2bb0b65d1";
 var jsonUrl = '';
 var res1;
 
+//var googleMapsApi = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBGvZjGmXWzhjfe4C9k_bg6OjchS-Sht-k&callback=initMap";
+//var googleMapsScript;
+
 request({
     url: jsonUrl,
     json: true
@@ -37,13 +40,16 @@ express()
         typeof lon == 'undefined' && 
         typeof lat == 'undefined')
     {
+        console.log("\nReceived page request from client " + 
+                    req.connection.remoteAddress);
         res.render("weather");
     }
     else if (typeof city == 'undefined' && 
              typeof lon != 'undefined' && 
              typeof lat != 'undefined')
     {
-        console.log("Looking up weather for:\nLongitude: " + lon + "\nLatitude: " + lat);
+        console.log("\nLooking up weather at " + lon + " : " + lat + 
+                    "\nfor client " + req.connection.remoteAddress);
         jsonUrl = "http://api.openweathermap.org/data/2.5/weather?lat=" + 
             lat + "&lon=" + lon + "&appid=" + appid;
         
@@ -54,7 +60,8 @@ express()
              typeof long == 'undefined' && 
              typeof lat == 'undefined')
     {
-        console.log("Looking up weather for:\nCity: " + city);
+        console.log("\nLooking up weather at " + city + 
+                    "\nfor client " + req.connection.remoteAddress);
         jsonUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + 
             city + "&appid=" + appid;
         
@@ -69,20 +76,41 @@ express()
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-function jsonLookup()
+/*function jsonLookup()
+{
+    request({
+        url: googleMapsApi
+    }, function (error, response, body, res) {
+        if (!error && response.statusCode === 200)
+        {
+            googleMapsScript = body;
+            console.log(body);
+            weatherLookup();
+        }
+        else
+        {
+            console.log("ERROR: Could not retrieve google maps script\n" + response.statusCode);
+        }
+    });
+}*/
+
+function jsonLookup()//function weatherLookup()
 {
     request({
             url: jsonUrl,
             json: true
             }, function (error, response, body, res) {
-
                 if (!error && response.statusCode === 200)
                 {
-                    console.log(body) // Print the json response
                     var cityName = body.name;
                     var temp = String(Math.round(Number(body.main.temp) * (9/5) - 459.67)) + " ℉";
                     var description = body.weather[0].description;
-                    res1.render("weather", {city : cityName, temp : temp, description : description});
+                    var main = body.weather[0].main;
+                    var lon = body.coord.lon;
+                    var lat = body.coord.lat;
+                    console.log("Received JSON for " + cityName + "\n" + lon + " : " + lat);
+                    res1.render("weather", {city : cityName, temp : temp, main : main, 
+                                            description : description, lon : lon, lat : lat});//, googleMapsScript, googleMapsScript});
                 }
                 else
                 {

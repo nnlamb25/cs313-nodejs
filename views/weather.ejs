@@ -2,6 +2,8 @@
 <html>
 <head>
 	<title>Weather Station</title>
+    <meta name="viewport" content="initial-scale=1.0">
+    <meta charset="utf-8">
     <link rel="stylesheet" href="stylesheets/weather.css">
     <script src="scripts/weather.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
@@ -14,6 +16,37 @@
 		<input id="info_button" onclick="showPosition('')" type="submit" name="calc" value="Get Info">
 	</div>
     <br>
+    <div id="map"></div>
+    <script>
+      var map;
+      var marker;
+      function initMap() 
+        {
+        <% if (typeof lat != 'undefined' && typeof lon != 'undefined') { %>
+              var latitude = <%= lat %>;
+              var longitude = <%= lon %>;
+        <% } else { %>
+              var latitude = 43.81;
+              var longitude = -111.78;
+        <% } %>
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: latitude, lng: longitude},
+          zoom: 12,
+          streetViewControl: false,
+          fullscreenControl: false
+        });
+        marker = new google.maps.Marker({
+            position: {lat: latitude, lng: longitude},
+            map: map
+        });
+      google.maps.event.addListener(map, "click", function (e) {
+        var url = "/weather?lat=" + e.latLng.lat() + "&lon=" + e.latLng.lng();
+        window.location.replace(url);
+        });
+      }
+    </script>
+    <script src= "https://maps.googleapis.com/maps/api/js?key=AIzaSyBGvZjGmXWzhjfe4C9k_bg6OjchS-Sht-k&callback=initMap"
+    async defer></script>
     <div id="info_wrapper"><div id="weather_info">
         <% if (typeof error == 'undefined' && typeof city == 'undefined'
               && typeof temp == 'undefined' && typeof description == 'undefined') { %>
@@ -28,8 +61,24 @@
             <%= temp %><br>
         <% } if (typeof description != 'undefined') { %>
             <%= description %><br>
+        <% } if (typeof main != 'undefined') { 
+                if (main == 'Thunderstorm') { %>
+                <img id="img" src="images/thunder.gif" alt="Thunderstorm">
+            <% } else if (main == 'Drizzle') { %>
+                <img id="img" src="images/drizzle.gif" alt="Drizzle">
+            <% } else if (main == 'Rain') { %>
+                <img id="img" src="images/rain.gif" alt="Rain">
+            <% } else if (main == 'Snow') { %>
+                <img id="img" src="images/snow.gif" alt="Snow">
+            <% } else if (main == 'Extreme') { %>
+                <img id="img" src="images/extreme.gif" alt="Extreme">
+            <% } else if (main == 'Clouds') { %>
+                <img id="img" src="images/clouds.gif" alt="Extreme">
+            <% } else { %>
+                <img id="img" src="images/clear.gif" alt="Clear">
+        <% }} else { %>
+            <img id="img" src="images/extreme.gif" alt="Clear">
         <% } %>
-        
         </div></div>
 </body>
 </html>
