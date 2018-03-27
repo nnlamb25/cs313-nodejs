@@ -10,12 +10,12 @@ function getLocation()
 {
     $("#weather_info").empty();
     $("#weather_info").append("Getting your location...<br>");
-    if (navigator.geolocation) 
+    if (navigator.geolocation)
     {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    } 
-    else 
-    { 
+        navigator.geolocation.getCurrentPosition(showPosition, errorCallback, {timeout:17500});
+    }
+    else
+    {
         $("#weather_info").empty();
         $("#weather_info").append("Search for a city or use your current location!");
         alert("Geolocation is not supported by this browser.");
@@ -26,11 +26,11 @@ function showPosition(position)
 {
     $("#weather_info").empty();
     $("#weather_info").append("Filling your request...<br>");
-        
+
     if (position != '')
     {
         var url = "/weather?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
-            
+
         window.location.replace(url);
     }
     else
@@ -43,11 +43,18 @@ function showPosition(position)
             alert("ERROR: Must enter a city name");
             return;
         }
-        
+
         var url = "/weather?city=" + city;
-        
+
         window.location.replace(url);
     }
+}
+
+function errorCallback(error)
+{
+  $("#weather_info").empty();
+  $("#weather_info").append("Search for a city or use your current location!");
+  alert("Geolocation is not working.\nPlease search for a location to view the wearther.");
 }
     /*
     if (position == '')
@@ -61,7 +68,7 @@ function showPosition(position)
         $.ajax(
         {
             beforeSend: function()
-            { 
+            {
                 $("#weather_info").empty();
                 $("#weather_info").append("Filling your request...<br>");
             },
@@ -76,8 +83,8 @@ function showPosition(position)
                 $("#weather_info").append("Temp: " + String(Math.round(fTemp)) + " ℉<br>");
                 $("#weather_info").append("Wind: " + result.wind.speed + " m/s<br>");
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown) 
-            { 
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
                 $("#weather_info").empty();
                 $("#weather_info").append("Search for a city or use your current location!");
                 console.log("ERROR:");
@@ -93,13 +100,13 @@ function showPosition(position)
         $.ajax(
         {
             beforeSend: function()
-            { 
+            {
                 $("#weather_info").empty();
                 $("#weather_info").append("Filling your request...<br>");
             },
             type: 'GET',
-            url: "http://api.openweathermap.org/data/2.5/weather?lat=" + 
-               position.coords.latitude + "&lon=" + position.coords.longitude + 
+            url: "http://api.openweathermap.org/data/2.5/weather?lat=" +
+               position.coords.latitude + "&lon=" + position.coords.longitude +
                "&appid=3411e21b6e00192d6705faf2bb0b65d1",
             success: function(result)
             {
@@ -110,8 +117,8 @@ function showPosition(position)
                 $("#weather_info").append("Temp: " + String(Math.round(fTemp)) + " ℉<br>");
                 $("#weather_info").append("Wind: " + result.wind.speed + " m/s<br>");
             },
-            error: function(XMLHttpRequest, textStatus, errorThrown) 
-            { 
+            error: function(XMLHttpRequest, textStatus, errorThrown)
+            {
                 $("#weather_info").empty();
                 $("#weather_info").append("Search for a city or use your current location!");
                 console.log("ERROR:");

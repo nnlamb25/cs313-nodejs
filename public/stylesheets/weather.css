@@ -9,7 +9,7 @@ html, body
 {
     height: 500px;
     width: 700px;
-    margin: 20px 0px 0px 30px;
+    margin: 20px 0px 0px 50px;
     float: left;
     border: 10px solid deepskyblue;
     border-radius: 10px;
@@ -78,6 +78,57 @@ html, body
 {
     #img
     {
+        width: 400px;
+    }
+    #map
+    {
+        margin: 20px 0px 0px 30px;
+    }
+}
+
+@media all and (max-width: 1200px)
+{
+    #img
+    {
         width: 300px;
+    }
+}
+
+@media all and (max-width: 1070px)
+{
+    
+    #map
+    {
+        height: 285px;
+        width: 400px;
+        margin: 10px 10px 0px 10px;
+        border: 5px solid deepskyblue;
+        border-radius: 5px;
+    }
+}
+
+@media all and (max-width: 800px)
+{
+    #img
+    {
+        width: 200px;
+    }
+}
+
+@media all and (max-width: 680px)
+{
+    #img
+    {
+        width: 125px;
+        border: 3px solid deepskyblue;
+    }
+}
+
+@media all and (max-width: 580px)
+{
+    #img
+    {
+        width: 300px;
+        border: 7px solid deepskyblue;
     }
 }
