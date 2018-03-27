@@ -12,7 +12,7 @@ function getLocation()
     $("#weather_info").append("Getting your location...<br>");
     if (navigator.geolocation)
     {
-        navigator.geolocation.getCurrentPosition(showPosition, errorCallback, {timeout:17500});
+        navigator.geolocation.getCurrentPosition(showPosition, errorCallback, {timeout:12000});
     }
     else
     {
