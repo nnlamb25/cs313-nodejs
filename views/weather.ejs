@@ -20,7 +20,7 @@
     <script>
       var map;
       var marker;
-      function initMap() 
+      function initMap()
         {
         <% if (typeof lat != 'undefined' && typeof lon != 'undefined') { %>
               var latitude = <%= lat %>;
@@ -61,7 +61,7 @@
             <%= temp %><br>
         <% } if (typeof description != 'undefined') { %>
             <%= description %><br>
-        <% } if (typeof main != 'undefined') { 
+        <% } if (typeof main != 'undefined') {
                 if (main == 'Thunderstorm') { %>
                 <img id="img" src="images/thunder.gif" alt="Thunderstorm">
             <% } else if (main == 'Drizzle') { %>

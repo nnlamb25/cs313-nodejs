@@ -7,9 +7,6 @@ var jsonQuery = require('json-query');
 
 var appid = "3411e21b6e00192d6705faf2bb0b65d1";
 
-//var googleMapsApi = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBGvZjGmXWzhjfe4C9k_bg6OjchS-Sht-k&callback=initMap";
-//var googleMapsScript;
-
 const path = require('path');
 const PORT = process.env.PORT || 5000;
 const url = require('url');
@@ -62,25 +59,7 @@ express()
 })
   .listen(PORT, () => console.log(`Listening on ${ PORT }`))
 
-/*function jsonLookup()
-{
-    request({
-        url: googleMapsApi
-    }, function (error, response, body, res) {
-        if (!error && response.statusCode === 200)
-        {
-            googleMapsScript = body;
-            console.log(body);
-            weatherLookup();
-        }
-        else
-        {
-            console.log("ERROR: Could not retrieve google maps script\n" + response.statusCode);
-        }
-    });
-}*/
-
-function jsonLookup(jsonUrl, res)//function weatherLookup()
+function jsonLookup(jsonUrl, res)
 {
     request({
             url: jsonUrl,
@@ -96,7 +75,7 @@ function jsonLookup(jsonUrl, res)//function weatherLookup()
                     var lat = body.coord.lat;
                     console.log("Received JSON for " + cityName + "\n" + lon + " : " + lat);
                     res.render("weather", {city : cityName, temp : temp, main : main,
-                                            description : description, lon : lon, lat : lat});//, googleMapsScript, googleMapsScript});
+                                            description : description, lon : lon, lat : lat});
                 }
                 else
                 {
